@@ -1,5 +1,6 @@
 const {
     generateWordsOfGivenLength,
+    getAllSubstringsOfCorrectLength,
     generateEnglishWords,
     permute,
     permuteN,
@@ -19,5 +20,15 @@ const beep = require('beepbeep')
 // console.log(generateEnglishWords('gpeeld'))
 
 console.log('generateWordsOfGivenLength:')
-console.log(generateWordsOfGivenLength('garlic', 5))
+console.log(generateWordsOfGivenLength('enrsmo', 6))
+console.log(generateWordsOfGivenLength('enrsmo', 5))
+console.log(generateWordsOfGivenLength('enrsmo', 4))
+console.log(generateWordsOfGivenLength('enrsmo', 3))
+
+
+// const allSubstringsOfCorrectLength = getAllSubstringsOfCorrectLength('abbbef', 5)
+// console.log('Number of substrings of correct length = ', allSubstringsOfCorrectLength.length)
+// console.log('The substrings: ')
+// console.log(allSubstringsOfCorrectLength)
+
 beep()

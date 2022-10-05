@@ -5,24 +5,12 @@ const generateWordsOfGivenLength = (charString, lth) => {
     if (charString.length === lth) {
         return generateEnglishWords(charString)
     }
-    const allPerms = permute(charString)
-    let allSubStrings = []
-    for (let i = 0; i < allPerms.length; ++i) {
-        let subStrings = getAllSubstrings(allPerms[i])
-        allSubStrings = allSubStrings.concat(subStrings)
-    }
-    const uniqueSubstrings = [...new Set(allSubStrings)]
 
-    const correctLengthSubstrings = uniqueSubstrings.filter(substring => {
-        return substring.length === lth
+    const uniqueCorrectLengthSubstrings = getAllSubstringsOfCorrectLength(charString, lth)
+    let validWordsOfGivenLength = uniqueCorrectLengthSubstrings.filter(word => {
+        return checkEnglishWord.check(word)
     })
-    let allWordsOfGivenLength = []
-    for (let i = 0; i < correctLengthSubstrings.length; ++i) {
-        let wordsForThisSubstring = generateEnglishWords(correctLengthSubstrings[i])
-        allWordsOfGivenLength = allWordsOfGivenLength.concat(wordsForThisSubstring)
-    }
-    allWordsOfGivenLength = [...new Set(allWordsOfGivenLength)]
-    return allWordsOfGivenLength
+    return validWordsOfGivenLength
 }
 
 const getAllSubstrings = (str) => {
@@ -34,6 +22,12 @@ const getAllSubstrings = (str) => {
         }
     }
     return result;
+}
+
+const getAllSubstringsOfCorrectLength = (str, lth) => {
+    const allStrPerms = permute(str)
+    const allSubstringsOfCorrectLength = allStrPerms.map(stringPerm => stringPerm.substring(0,lth))
+    return [...new Set(allSubstringsOfCorrectLength)]
 }
 
 const generateEnglishWords = (charString) => {
@@ -91,6 +85,7 @@ const generatePerms = (intArr) => {
 
 module.exports = {
     generateWordsOfGivenLength,
+    getAllSubstringsOfCorrectLength,
     generateEnglishWords,
     permute,
     permuteN,
